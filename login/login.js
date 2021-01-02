@@ -13,18 +13,18 @@ $("#goto-login").on("click", function () {
   $("#login").show().siblings("#register").hide();
 });
 // 功能二:注册盒子的ajax请求
-const { form } = window.layui;
-//表单校验
-form.verify({
-  username: [/^[a-z0-9]{6,10}$/, "账号名是6到10位由数字, 小写字母组成"],
-  password: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"],
-  repeatpd: (value) => {
-    //value：表单的值、item：表单的DOM对象
-    if ($(".register-password").val() != value) {
-      return "两次密码不相同";
-    }
-  },
-});
+// const { form } = window.layui;
+// //表单校验
+// form.verify({
+//   username: [/^[a-z0-9]{6,10}$/, "账号名是6到10位由数字, 小写字母组成"],
+//   password: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"],
+//   repeatpd: (value) => {
+//     //value：表单的值、item：表单的DOM对象
+//     if ($(".register-password").val() != value) {
+//       return "两次密码不相同";
+//     }
+//   },
+// });
 $("#register .layui-form").on("submit", (e) => {
   //阻止表单的默认跳转
   e.preventDefault();

@@ -1,18 +1,35 @@
-// 1. form标签 - 绑定submit事件
-$(".layui-form").on("submit", e => {
-    e.preventDefault();
-    let obj = {
-        oldPwd: md5($(".layui-form input[name=oldPwd]").val()),
-        newPwd: md5($(".layui-form input[name=newPwd]").val())
-    }
-    let argStr = objToAS(obj);
-    changePassAPI(argStr, res => {
-        // 清除本地的token
-        // 强制跳转到登录页面 - 让用户重新登录
-        setTimeout(() => {
-            sessionStorage.removeItem("token");
-            window.parent.location.href = "/login.html";
-        }, 1500);
-    })
+// const { form } = window.layui;
+// //表单验证
+// form.verify({
+//   diff: function (value) {
+//     if ($('input[name="oldPwd]').val() == value) {
+//       return "新旧密码一样";
+//     }
+//   },
+//   same: function (value) {
+//     if ($('input[name="newPwd]').val() !== value) {
+//       return "和新密码不一样";
+//     }
+//   },
+// });
+//重置密码
+$(".layui-form").on("submit", (e) => {
+  e.preventDefault();
+  const data={
+    oldPwd:$('input[name=oldPwd]').val(),
+    newPwd:$('input[name=newPwd]').val(),
+  }
+  let dataStr = requestDataHandle(data);
+  //axios请求数据
+  resetPasswordApi(dataStr,backData=>{
+    // console.log(backData);
+    window.localStorage.removeItem('token')
+    window.parent.location.href='/login.html'
+  })
+});
+//重置按钮
+$('.my_reset').on('click',()=>{
+  $('input[name=oldPwd]').val('')
+  $('input[name=oldPwd]').val('')
+  $('#myPwd').val('')
 })
-// html+css+前端页面的一切功能(交互/验证)+调用接口请求-拿回来数据在回显页面

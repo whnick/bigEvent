@@ -6,8 +6,8 @@ axios.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
     // console.log("请求拦截器------", config);
-    const AUTH_TOKEN = window.localStorage.getItem("token");
     //配置全局请求头
+    const AUTH_TOKEN = window.localStorage.getItem("token");
     config.headers["Authorization"] = AUTH_TOKEN;
     return config;
   },
@@ -75,9 +75,102 @@ const userInfoApi = function (cb) {
   axios({
     method: "get",
     url: "/my/userinfo",
-    // data: dataStr,
     dataType: "json",
   }).then((backData) => {
     cb(backData);
   });
 };
+//设置用户的基本信息
+const setUserInfoApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: "/my/userinfo",
+    data: dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+
+//重置密码
+const resetPasswordApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: "/my/updatepwd",
+    data: dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+//更换头像
+const resetAvatarApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: "/my/update/avatar",
+    data: dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+// 获取文章分类列表
+const getArticleCategroyApi=(cb)=>{
+  axios({
+    method: "get",
+    url: "/my/article/cates",
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+// 新增文章分类列表
+const addArticleCategroyApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: "/my/article/addcates",
+    data: dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+//根据id删除文章分类
+const deleteArticleCategroyApi=(dataStr,cb)=>{
+  // axios({
+  //   method: "get",
+  //   url: '/my/article/deletecate',
+  //   params: {
+  //     id: dataStr
+  //   },
+  //   dataType: "json",
+  // }).then((backData) => {
+  //   cb(backData);
+  // });
+  axios.get(`/my/article/deletecate/${dataStr}`).then((res) => {
+    cb(res)
+  })
+}
+
+//编辑文章分类
+const editArticleCategroyApi=(dataStr,cb)=>{
+   axios({
+    method: "post",
+    url: '/my/article/updatecate',
+  data:dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+
+//文章分类下拉菜单
+// const categroyListApi=(cb)=>{
+//   axios({
+//     method: "post",
+//     url: '/my/article/updatecate',
+//     dataType: "json",
+//   }).then((backData) => {
+//     cb(backData);
+//   });
+// }
