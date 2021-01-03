@@ -164,13 +164,49 @@ const editArticleCategroyApi=(dataStr,cb)=>{
   });
 }
 
-//文章分类下拉菜单
-// const categroyListApi=(cb)=>{
-//   axios({
-//     method: "post",
-//     url: '/my/article/updatecate',
-//     dataType: "json",
-//   }).then((backData) => {
-//     cb(backData);
-//   });
-// }
+//发布新文章  FormData 格式
+const addArticleApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: '/my/article/add',
+  data:dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
+//获取文章列表
+const getArticleListApi=(dataStr,cb)=>{
+  axios({
+    method: "get",
+    url: '/my/article/list',
+  params:dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+
+}
+//根据id删除文章
+const deleteArticleByIdApi=(dataStr,cb)=>{
+  axios.get(`/my/article/delete/${dataStr}`).then((res) => {
+    cb(res)
+  })
+}
+//根据id获取文章
+const getArticleByIdApi=(dataStr,cb)=>{
+  axios.get(`/my/article/${dataStr}`).then((res) => {
+    cb(res)
+  })
+}
+//根据id更新文章
+const updateArticleByIdApi=(dataStr,cb)=>{
+  axios({
+    method: "post",
+    url: '/my/article/edit',
+  data:dataStr,
+    dataType: "json",
+  }).then((backData) => {
+    cb(backData);
+  });
+}
