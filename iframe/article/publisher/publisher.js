@@ -33,12 +33,13 @@ getArticleCategroyApi((backData) => {
 });
 
 //初始化富文本
-tinymce.init({
-  selector: "textarea[name=content]", //容器，可使用css选择器
-  language: "zh_CN", //调用放在langs文件夹内的语言包
-  plugins: ["link", "table", "image"], //选择需加载的插件
-  //选中时出现的快捷工具，与插件有依赖关系
-});
+// tinymce.init({
+//   selector: "textarea[name=content]", //容器，可使用css选择器
+//   language: "zh_CN", //调用放在langs文件夹内的语言包
+//   plugins: ["link", "table", "image"], //选择需加载的插件
+//   //选中时出现的快捷工具，与插件有依赖关系
+// });
+initEditor()
 
 //初始化裁剪
 let cropper = new Cropper($("#image")[0], {
